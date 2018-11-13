@@ -1,4 +1,3 @@
-import getConnection from './db/connection';
 const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('./config');
@@ -7,18 +6,6 @@ const setup = require('./setup');
 const app = express();
 
 app.use(bodyParser.json());
-
-app.get('/api/items', (req, res) => {
-  const connection = getConnection.connect();
-  connection.query('select id, name, price, image_url from ‘items’;',
-    function (err, rows, fields) {
-      res.json({
-        row,
-        fields,
-      });
-  });
-  
-});
 
 setup(app);
 

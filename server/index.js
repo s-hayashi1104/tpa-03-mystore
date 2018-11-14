@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 setup(app);
 
 app.listen(config.port, () =>
-  console.info(`server started on port ${config.port}`),
+  console.info(`server started on port ${config.port}`)
 );
 
 app.use((err, req, res) => {

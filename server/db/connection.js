@@ -5,7 +5,7 @@ module.exports = {
     const connection = await mysql.createConnection({
       host: 'localhost',
       user: 'root',
-      password: '',
+      password: 'Sju$34Tuf62Erqw1',
       database: 'my_store',
     });
     return connection;

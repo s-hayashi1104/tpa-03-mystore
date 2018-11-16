@@ -14,6 +14,18 @@ const setup = function(app) {
       res.status(500);
     }
   });
+  app.post('/api/items', async(req, res) => {
+    try {
+      const connection = await db.getConnection();
+      let values = [req.body.name, req.body.price, req.body.image_url];
+      let sql = 'insert into items (name, price, image_url) values (?, ?, ?)';
+      await connection.query(sql, values);
+      res.status(200);
+    } catch (err) {
+      console.error(err);
+      res.status(500);
+    }
+  });
 };
 
 module.exports = setup;

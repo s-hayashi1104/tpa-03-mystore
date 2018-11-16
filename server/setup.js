@@ -18,8 +18,8 @@ const setup = function(app) {
     try {
       const connection = await db.getConnection();
       let values = [req.body.name, req.body.price, req.body.image_url];
-      let sql = 'insert into items (name, price, image_url) values (?)';
-      await connection.query(sql, [values]);
+      let sql = 'insert into items (name, price, image_url) values (?, ?, ?)';
+      await connection.query(sql, values);
       res.status(200);
     } catch (err) {
       console.error(err);

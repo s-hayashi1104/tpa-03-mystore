@@ -18,9 +18,8 @@ export default {
   },
   created: async function(){
     this.items = [];
-    console.log('hogehoge');
-    const obj = await api.getItems();
-    this.items = obj.row;
+    const { row } = await api.getItems();
+    this.items = row;
   },
   methods: {
     handleAdminClick: function(evt) {

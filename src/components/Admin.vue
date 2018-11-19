@@ -3,9 +3,9 @@
     <h1>Admin Page</h1>
     <p>See the <a href="#" v-on:click="handleStoreClick">Store</a></p>
     <form @submit.prevent="register">
-    <input id="name" type="text" placeholder="name" />
-    <input id="price" type="number" placeholder="price" />
-    <input id="imageUrl" type="text" placeholder="imageUrl" />
+    <input v-model="name" type="text" placeholder="name" />
+    <input v-model="price" type="number" placeholder="price" />
+    <input v-model="imageUrl" type="text" placeholder="imageUrl" />
     <button type="submit">submit</button>
   </form>
   </div>
@@ -16,19 +16,21 @@ import api from '../api-service';
 
 export default {
   name: 'Admin',
+  data:() => {
+    return {
+      name: '',
+      price: '',
+      imageUrl: '',
+    };
+  },
   methods: {
     handleStoreClick: function(evt) {
       evt.preventDefault();
       this.$router.push('/');
     },
-    register: async function(evt) {
+    register: async function() {
       try{
-        console.log(evt);
-        const name = document.getElementById('name');
-        const price = document.getElementById('price');
-        const imageUrl = document.getElementById('imageUrl');
-        console.log(name.value);
-        await api.createItem(name.value, price.value, imageUrl.value);
+        await api.createItem({ name: this.name, price: this.price, imageUrl: this.imageUrl });
       } catch(err) {
         console.error(err);
       }

@@ -6,10 +6,10 @@ export default {
     return fetch('/api/items', options)
       .then(response => response.json());
   },
-  createItem: ({ name, price, imageUrl }) => {
+  createItem: ({ name, price, image_url }) => {
     const options = {
       method: 'POST',
-      body: JSON.stringify({ name, price, imageUrl }),
+      body: JSON.stringify({ name, price, image_url }),
       headers: {
         'content-type': 'application/json',
       },

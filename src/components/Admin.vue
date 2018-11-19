@@ -9,9 +9,9 @@
       <li v-for="error in errors" :key="error">{{ error }}</li>
     </ul>
   </p>
-    <input v-model="name" type="text" placeholder="name" />
-    <input v-model="price" type="number" placeholder="price" min="0" />
-    <input v-model="imageUrl" type="text" placeholder="imageUrl" />
+    <input v-model="item.name" type="text" placeholder="name" />
+    <input v-model="item.price" type="text" placeholder="price" />
+    <input v-model="item.image_url" type="text" placeholder="imageUrl" />
     <button type="submit">submit</button>
   </form>
   </div>
@@ -25,9 +25,11 @@ export default {
   data:() => {
     return {
       errors: [],
-      name: null,
-      price: null,
-      imageUrl: null,
+      item:{
+        name: null,
+        price: null,
+        image_url: null,
+      },
     };
   },
   methods: {
@@ -38,26 +40,30 @@ export default {
     register: async function() {
       this.checkForm();
       try{
-        await api.createItem({ name: this.name, price: this.price, imageUrl: this.imageUrl });
+        const { name, price, image_url } = this.item;
+        await api.createItem({ name, price, image_url });
       } catch(err) {
         console.error(err);
       }
     },
-    checkForm: function(e) {
-      if (this.name && this.price && this.imageUrl) {
+    checkForm: function() {
+      const { name, price, image_url } = this.item;
+      if (name && price && image_url) {
         return true;
       }
       this.errors = [];
-      if (!this.name) {
+      if (!name) {
         this.errors.push('Name required.');
       }
-      if (!this.price) {
+      if (!price) {
         this.errors.push('Price required.');
       }
-      if (!this.imageUrl) {
+      if(!parseInt(price, 10)){
+        this.errors.push('Price is Number.');
+      }
+      if (!image_url) {
         this.errors.push('Image URL required.');
       }
-      e.preventDefault();
     }
   },
 };

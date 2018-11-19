@@ -34,5 +34,6 @@ export default {
 <style scoped>
 div.item-list {
   display: flex; 
+  justify-content:center
 }
 </style>

@@ -11,7 +11,7 @@
   </p>
     <input v-model="item.name" type="text" placeholder="name" />
     <input v-model="item.price" type="text" placeholder="price" />
-    <input v-model="item.image_url" type="text" placeholder="imageUrl" />
+    <input v-model="item.imageUrl" type="text" placeholder="imageUrl" />
     <button type="submit">submit</button>
   </form>
   </div>
@@ -28,7 +28,7 @@ export default {
       item:{
         name: null,
         price: null,
-        image_url: null,
+        imageUrl: null,
       },
     };
   },
@@ -40,15 +40,15 @@ export default {
     register: async function() {
       this.checkForm();
       try{
-        const { name, price, image_url } = this.item;
-        await api.createItem({ name, price, image_url });
+        const { name, price, imageUrl } = this.item;
+        await api.createItem({ name, price, imageUrl });
       } catch(err) {
         console.error(err);
       }
     },
     checkForm: function() {
-      const { name, price, image_url } = this.item;
-      if (name && price && image_url) {
+      const { name, price, imageUrl } = this.item;
+      if (name && price && imageUrl) {
         return true;
       }
       this.errors = [];
@@ -61,7 +61,7 @@ export default {
       if(!parseInt(price, 10)){
         this.errors.push('Price is Number.');
       }
-      if (!image_url) {
+      if (!imageUrl) {
         this.errors.push('Image URL required.');
       }
     }
